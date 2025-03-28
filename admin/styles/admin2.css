@@ -3,7 +3,7 @@
     --secondary-color: #10b981;
     --background-light: #f3f4f6;
     --text-dark: #1f2937;
-    --text-gray: #6b7280;
+    --text-gray: #5b4848;
     --border-color: #e5e7eb;
 }
 
@@ -62,8 +62,8 @@ body {
 }
 
 .sidebar-menu a:hover, .sidebar-menu a.active {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: #3b82f6; /* This line sets the background color to blue on hover */
+    color: white; /* Set the text color to white for better contrast */
 }
 
 /* Main Content */

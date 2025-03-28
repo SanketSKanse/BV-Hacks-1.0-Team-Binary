@@ -7,24 +7,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/admin2.css">
     <link rel="stylesheet" href="../styles/theme.css">
+    <style>
+#sidebar-menu :hover{
+background-color: #3b82f6;
+border-radius: 8px;
+transition: all 0.3s ease;
+}
+
+    </style>
     <script>
         // Check for saved theme preference or default to 'light'
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
     </script>
 </head>
+
 <body data-theme="light">
     <div class="dashboard-container">
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-logo">CMS</div>
-            <ul class="sidebar-menu">
+            <ul class="sidebar-menu" id="sidebar-menu">
                 <li><a href="#dashboard" class="active">Dashboard</a></li>
                 <li><a href="complaints.html">Complaints</a></li>
                 <li><a href="history.html">History</a></li>
                 <li><a href="contacts.html">Contacts</a></li>
                 <li><a href="settings.html">Settings</a></li>
-                <li><a href="#logout" class="btn btn-secondary">Logout</a></li>
+                <li><a href="#logout" >Logout</a></li>
             </ul>
         </div>
 
