@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Complaint Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/admin2.css">
+    <link rel="stylesheet" href="../styles/theme.css">
+    <script>
+        // Check for saved theme preference or default to 'light'
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</head>
+<body data-theme="light">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-logo">CMS</div>
+            <ul class="sidebar-menu">
+                <li><a href="#dashboard" class="active">Dashboard</a></li>
+                <li><a href="complaints.html">Complaints</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="contacts.html">Contacts</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="#logout" class="btn btn-secondary">Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="dashboard-header">
+                <h1>Admin Dashboard</h1>
+                <div>Welcome, John Doe</div>
+            </div>
+
+            <!-- Metrics Cards -->
+            <div class="card">
+                <div class="card-grid">
+                    <div class="card-metric">
+                        <h3>Total Complaints</h3>
+                        <div class="metric-value">124</div>
+                    </div>
+                    <div class="card-metric">
+                        <h3>Resolved Complaints</h3>
+                        <div class="metric-value">86</div>
+                    </div>
+                    <div class="card-metric">
+                        <h3>Pending Complaints</h3>
+                        <div class="metric-value">38</div>
+                    </div>
+                    <div class="card-metric">
+                        <h3>Response Rate</h3>
+                        <div class="metric-value">92%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Complaints -->
+            <div class="card">
+                <h2 style="margin-bottom: 20px;">Recent Complaints</h2>
+                <table class="complaint-list">
+                    <thead>
+                        <tr>
+                            <th>Complaint ID</th>
+                            <th>Department</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#1245</td>
+                            <td>Hostel Maintenance</td>
+                            <td>Bathroom water leakage</td>
+                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td>
+                                <button class="btn">View Details</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#1246</td>
+                            <td>IT Department</td>
+                            <td>Wifi connectivity issues</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                            <td>
+                                <button class="btn">View Details</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#1247</td>
+                            <td>Electrical</td>
+                            <td>Power outlet not working</td>
+                            <td><span class="status-badge status-resolved">Resolved</span></td>
+                            <td>
+                                <button class="btn">View Details</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Analytics Charts -->
+            <div class="card">
+                <h2 style="margin-bottom: 20px;">Complaint Analytics</h2>
+                <div class="card-grid">
+                    <div>
+                        <h3>Department Distribution</h3>
+                        <div id="departmentChart" class="chart-container"></div>
+                    </div>
+                    <div>
+                        <h3>Complaint Status</h3>
+                        <div id="statusChart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function initCharts() {
+            const isDarkTheme = document.documentElement.getAttribute('data-theme') === 'dark';
+            const textColor = isDarkTheme ? '#f9fafb' : '#1f2937';
+
+            // Department Distribution Chart
+            const ctx1 = document.getElementById('departmentChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'pie',
+                data: {
+                    labels: ['Hostel', 'IT', 'Electrical', 'Cafeteria'],
+                    datasets: [{
+                        data: [30, 25, 20, 25],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.7)',
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(245, 158, 11, 0.7)',
+                            'rgba(139, 92, 246, 0.7)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { 
+                            position: 'bottom',
+                            labels: {
+                                color: textColor
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Complaint Status Chart
+            const ctx2 = document.getElementById('statusChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pending', 'In Progress', 'Resolved'],
+                    datasets: [{
+                        data: [30, 40, 30],
+                        backgroundColor: [
+                            'rgba(245, 158, 11, 0.7)',
+                            'rgba(59, 130, 246, 0.7)',
+                            'rgba(16, 185, 129, 0.7)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { 
+                            position: 'bottom',
+                            labels: {
+                                color: textColor
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize charts when page loads
+        initCharts();
+    </script>
+    <script src="theme.js"></script>
+</body>
+</html>
