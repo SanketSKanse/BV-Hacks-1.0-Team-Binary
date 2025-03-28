@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #10b981;
+            --background-light: #f3f4f6;
+            --text-dark: #1f2937;
+            --text-gray: #6b7280;
+            --border-color: #e5e7eb;
+            
+            /* Dark Theme Variables */
+            --dark-primary-color: #2563eb;
+            --dark-background: #111827;
+            --dark-card-background: #1f2937;
+            --dark-text-color: #f3f4f6;
+            --dark-border-color: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-theme {
+            background-color: var(--dark-background);
+            color: var(--dark-text-color);
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar (Same as admin2.css) */
+        .sidebar {
+            width: 260px;
+            background-color: white;
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dark-theme .sidebar {
+            background-color: var(--dark-card-background);
+            border-right-color: var(--dark-border-color);
+        }
+
+        .sidebar-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: var(--text-gray);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .dark-theme .sidebar-menu a {
+            color: var(--background-light);
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+            background-color: var(--background-light);
+        }
+
+        .dark-theme .main-content {
+            background-color: var(--dark-background);
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .dark-theme .card {
+            background-color: var(--dark-card-background);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .settings-section {
+            margin-bottom: 25px;
+        }
+
+        .settings-section h2 {
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .dark-theme .settings-section h2 {
+            border-bottom-color: var(--dark-border-color);
+        }
+
+        .theme-options {
+            display: flex;
+            gap: 15px;
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 10px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+        }
+
+        .theme-option.selected {
+            border-color: var(--primary-color);
+        }
+
+        .theme-option-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2563eb;
+        }
+
+        .profile-form {
+            display: grid;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            color: var(--text-gray);
+        }
+
+        .dark-theme .form-group label {
+            color: var(--background-light);
+        }
+
+        .form-group input {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .dark-theme .form-group input {
+            background-color: var(--dark-card-background);
+            border-color: var(--dark-border-color);
+            color: var(--dark-text-color);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .sidebar-menu {
+                display: flex;
+                flex-grow: 1;
+                justify-content: space-around;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar (Same as previous dashboard) -->
+        <div class="sidebar">
+            <div class="sidebar-logo">CMS</div>
+            <ul class="sidebar-menu">
+                <li><a href="admin2.html">Dashboard</a></li>
+                <li><a href="complaints.html">Complaints</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="contacts.html">Contacts</a></li>
+                <li><a href="#settings" class="active">Settings</a></li>
+                <li><a href="#logout" class="btn btn-secondary">Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="dashboard-header">
+                <h1>Settings</h1>
+                <div>Welcome, John Doe</div>
+            </div>
+
+            <!-- Theme Settings -->
+            <div class="card settings-section">
+                <h2>Theme Preferences</h2>
+                <div class="theme-options">
+                    <div class="theme-option" data-theme="light">
+                        <div class="theme-option-color" style="background-color: #f3f4f6;"></div>
+                        <span>Light Theme</span>
+                    </div>
+                    <div class="theme-option" data-theme="dark">
+                        <div class="theme-option-color" style="background-color: #111827;"></div>
+                        <span>Dark Theme</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Settings -->
+            <div class="card settings-section">
+                <h2>Profile Settings</h2>
+                <form class="profile-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" value="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" value="john.doe@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Change Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter new password">
+                    </div>
+                    <button type="submit" class="btn">Save Changes</button>
+                </form>
+            </div>
+
+            <!-- Notification Preferences -->
+            <div class="card settings-section">
+                <h2>Notification Preferences</h2>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" checked> Email Notifications
+                    </label>
+                    <label>
+                        <input type="checkbox"> SMS Alerts
+                    </label>
+                    <label>
+                        <input type="checkbox" checked> In-App Notifications
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Switching Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeOptions = document.querySelectorAll('.theme-option');
+            const body = document.body;
+
+            // Check and apply saved theme
+            const savedTheme = localStorage.getItem('dashboard-theme');
+            if (savedTheme) {
+                body.classList.toggle('dark-theme', savedTheme === 'dark');
+                updateThemeSelection(savedTheme);
+            }
+
+            themeOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const theme = option.dataset.theme;
+                    
+                    // Remove selected from all options
+                    themeOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected to clicked option
+                    option.classList.add('selected');
+                    
+                    // Toggle dark theme
+                    body.classList.toggle('dark-theme', theme === 'dark');
+                    
+                    // Save theme preference
+                    localStorage.setItem('dashboard-theme', theme);
+                });
+            });
+
+            // Update theme option selection
+            function updateThemeSelection(theme) {
+                themeOptions.forEach(option => {
+                    option.classList.toggle('selected', option.dataset.theme === theme);
+                });
+            }
+
+            // Profile Form Submission
+            const profileForm = document.querySelector('.profile-form');
+            profileForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Profile settings saved successfully!');
+            });
+        });
+    </script>
+    <script src="settings.js"></script>
+    <script src="theme.js"></script>
+</body>
+</html>
