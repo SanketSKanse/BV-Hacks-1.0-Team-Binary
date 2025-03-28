@@ -1,144 +1,104 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const complaintsData = [
-        {
-            id: '#1245',
-            studentName: 'Alice Johnson',
-            department: 'Hostel',
-            description: 'Bathroom water leakage',
-            status: 'in-progress',
-            details: 'Water is continuously leaking from the bathroom ceiling. Need immediate repair.',
-            dateReported: '2024-03-15',
-            priority: 'High'
-        },
-        {
-            id: '#1246',
-            studentName: 'Bob Smith',
-            department: 'IT',
-            description: 'Wifi connectivity issues',
-            status: 'pending',
-            details: 'Intermittent wifi connection in dormitory block A.',
-            dateReported: '2024-03-16',
-            priority: 'Medium'
-        },
-        {
-            id: '#1247',
-            studentName: 'Charlie Brown',
-            department: 'Electrical',
-            description: 'Power outlet not working',
-            status: 'resolved',
-            details: 'Power outlet in study room 204 is not functioning.',
-            dateReported: '2024-03-10',
-            priority: 'Low'
-        }
-    ];
-
-    const tableBody = document.getElementById('complaintsTableBody');
-    const departmentFilter = document.getElementById('departmentFilter');
-    const statusFilter = document.getElementById('statusFilter');
-    const createComplaintBtn = document.getElementById('createComplaintBtn');
-    const modal = document.getElementById('complaintModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalBody = document.getElementById('modalBody');
-    const closeModalBtns = document.querySelectorAll('.close-modal, #closeModalBtn');
-    const updateStatusBtn = document.getElementById('updateStatusBtn');
-
-    // Render complaints table
-    function renderComplaints(complaints) {
-        tableBody.innerHTML = '';
-        complaints.forEach(complaint => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${complaint.id}</td>
-                <td>${complaint.studentName}</td>
-                <td>${complaint.department}</td>
-                <td>${complaint.description}</td>
-                <td>
-                    <span class="status-badge status-${complaint.status}">
-                        ${complaint.status.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                    </span>
-                </td>
-                <td>
-                    <button class="btn view-complaint" data-id="${complaint.id}">View</button>
-                </td>
-            `;
-            tableBody.appendChild(row);
-        });
-
-        // Add event listeners to view buttons
-        document.querySelectorAll('.view-complaint').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const complaintId = btn.dataset.id;
-                showComplaintDetails(complaintId);
-            });
-        });
-    }
-
-    // Show complaint details in modal
-    function showComplaintDetails(complaintId) {
-        const complaint = complaintsData.find(c => c.id === complaintId);
-        if (complaint) {
-            modalTitle.textContent = `Complaint ${complaint.id}`;
-            modalBody.innerHTML = `
-                <p><strong>Student:</strong> ${complaint.studentName}</p>
-                <p><strong>Department:</strong> ${complaint.department}</p>
-                <p><strong>Description:</strong> ${complaint.description}</p>
-                <p><strong>Details:</strong> ${complaint.details}</p>
-                <p><strong>Date Reported:</strong> ${complaint.dateReported}</p>
-                <p><strong>Priority:</strong> ${complaint.priority}</p>
-                <p><strong>Current Status:</strong> 
-                    <span class="status-badge status-${complaint.status}">
-                        ${complaint.status.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                    </span>
-                </p>
-            `;
-            modal.style.display = 'block';
-        }
-    }
-
-    // Filter complaints
-    function filterComplaints() {
-        const selectedDepartment = departmentFilter.value.toLowerCase();
-        const selectedStatus = statusFilter.value.toLowerCase();
-
-        const filteredComplaints = complaintsData.filter(complaint => {
-            const departmentMatch = !selectedDepartment || 
-                complaint.department.toLowerCase() === selectedDepartment;
-            const statusMatch = !selectedStatus || 
-                complaint.status.toLowerCase() === selectedStatus;
-            return departmentMatch && statusMatch;
-        });
-
-        renderComplaints(filteredComplaints);
-    }
-
-    // Initial render
-    renderComplaints(complaintsData);
-
-    // Filter event listeners
-    departmentFilter.addEventListener('change', filterComplaints);
-    statusFilter.addEventListener('change', filterComplaints);
-
-    // Modal close functionality
-    closeModalBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-    });
-
-    // Create complaint (placeholder)
-    createComplaintBtn.addEventListener('click', () => {
-        alert('Create Complaint functionality to be implemented');
-    });
-
-    // Update status (placeholder)
-    updateStatusBtn.addEventListener('click', () => {
-        alert('Update Status functionality to be implemented');
-    });
-
-    // Close modal when clicking outside
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    displayComplaints();
+    updateMetrics();
+    updateChartData();
 });
+
+function displayComplaints() {
+    const complaintsTableBody = document.getElementById('complaintsTableBody');
+    let complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+    
+    // Sort complaints by date (newest first)
+    complaints.sort((a, b) => b.id - a.id);
+    
+    complaintsTableBody.innerHTML = '';
+
+    if (complaints.length === 0) {
+        complaintsTableBody.innerHTML = `
+            <tr>
+                <td colspan="7" style="text-align: center;">No complaints found</td>
+            </tr>`;
+        return;
+    }
+
+    complaints.forEach(complaint => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>#${complaint.id}</td>
+            <td>${complaint.category}</td>
+            <td><span class="priority-badge priority-${complaint.priority.toLowerCase()}">${complaint.priority}</span></td>
+            <td>${complaint.description}</td>
+            <td>${complaint.date}</td>
+            <td>
+                <select class="status-select" onchange="updateStatus(${complaint.id}, this.value)">
+                    <option value="Pending" ${complaint.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                    <option value="In Progress" ${complaint.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                    <option value="Resolved" ${complaint.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
+                </select>
+            </td>
+            <td>
+                <button class="btn" onclick="viewDetails(${complaint.id})">View Details</button>
+            </td>
+        `;
+        complaintsTableBody.appendChild(row);
+    });
+}
+
+function updateMetrics() {
+    const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+    
+    const metrics = {
+        total: complaints.length,
+        resolved: complaints.filter(c => c.status === 'Resolved').length,
+        pending: complaints.filter(c => c.status === 'Pending').length,
+        inProgress: complaints.filter(c => c.status === 'In Progress').length
+    };
+
+    // Calculate response rate
+    const responseRate = complaints.length > 0 
+        ? Math.round((metrics.resolved / metrics.total) * 100) 
+        : 0;
+
+    // Update metric cards
+    document.querySelector('.card-metric:nth-child(1) .metric-value').textContent = metrics.total;
+    document.querySelector('.card-metric:nth-child(2) .metric-value').textContent = metrics.resolved;
+    document.querySelector('.card-metric:nth-child(3) .metric-value').textContent = metrics.pending;
+    document.querySelector('.card-metric:nth-child(4) .metric-value').textContent = `${responseRate}%`;
+}
+
+function updateStatus(id, newStatus) {
+    let complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+    const complaint = complaints.find(c => c.id === id);
+    
+    if (complaint) {
+        complaint.status = newStatus;
+        localStorage.setItem('complaints', JSON.stringify(complaints));
+        updateMetrics();
+        updateChartData();
+    }
+}
+
+function viewDetails(id) {
+    // Implement view details functionality
+    alert('View details functionality coming soon!');
+}
+
+function updateChartData() {
+    const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+    
+    // Update department distribution chart
+    const departmentData = {};
+    complaints.forEach(complaint => {
+        departmentData[complaint.category] = (departmentData[complaint.category] || 0) + 1;
+    });
+
+    // Update status chart
+    const statusData = {
+        'Pending': complaints.filter(c => c.status === 'Pending').length,
+        'In Progress': complaints.filter(c => c.status === 'In Progress').length,
+        'Resolved': complaints.filter(c => c.status === 'Resolved').length
+    };
+
+    // Re-initialize charts with new data
+    initCharts(departmentData, statusData);
+}

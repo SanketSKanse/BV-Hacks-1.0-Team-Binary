@@ -157,6 +157,29 @@ body {
     color: #047857; 
 }
 
+/* Add these styles for priority badges */
+.priority-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.priority-high {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+.priority-medium {
+    background-color: #fef3c7;
+    color: #d97706;
+}
+
+.priority-low {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
 /* Buttons */
 .btn {
     display: inline-block;
@@ -209,9 +232,9 @@ body {
 }
 
 .status-select {
-    padding: 5px 10px;
+    padding: 4px 8px;
     border-radius: 4px;
-    border: 1px solid #ddd;
+    border: 1px solid #e5e7eb;
 }
 
 .action-btn {

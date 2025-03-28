@@ -69,44 +69,20 @@ transition: all 0.3s ease;
             <!-- Recent Complaints -->
             <div class="card">
                 <h2 style="margin-bottom: 20px;">Recent Complaints</h2>
-                <table class="complaint-list">
+                <table class="complaint-list" id="complaintsTable">
                     <thead>
                         <tr>
                             <th>Complaint ID</th>
-                            <th>Department</th>
+                            <th>Category</th>
+                            <th>Priority</th>
                             <th>Description</th>
+                            <th>Date</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>#1245</td>
-                            <td>Hostel Maintenance</td>
-                            <td>Bathroom water leakage</td>
-                            <td><span class="status-badge status-in-progress">In Progress</span></td>
-                            <td>
-                                <button class="btn">View Details</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#1246</td>
-                            <td>IT Department</td>
-                            <td>Wifi connectivity issues</td>
-                            <td><span class="status-badge status-pending">Pending</span></td>
-                            <td>
-                                <button class="btn">View Details</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#1247</td>
-                            <td>Electrical</td>
-                            <td>Power outlet not working</td>
-                            <td><span class="status-badge status-resolved">Resolved</span></td>
-                            <td>
-                                <button class="btn">View Details</button>
-                            </td>
-                        </tr>
+                    <tbody id="complaintsTableBody">
+                        <!-- Complaints will be loaded dynamically -->
                     </tbody>
                 </table>
             </div>
@@ -196,5 +172,6 @@ transition: all 0.3s ease;
         initCharts();
     </script>
     <script src="theme.js"></script>
+    <script src="../scripts/complaints.js"></script>
 </body>
 </html>
