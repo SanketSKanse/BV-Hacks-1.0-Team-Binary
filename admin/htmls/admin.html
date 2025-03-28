@@ -1,0 +1,55 @@
+<!-- Add this inside your main content area -->
+<div class="complaints-section">
+    <h2>Recent Complaints</h2>
+    <table id="adminComplaintsTable" class="complaints-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Complaints will be loaded here dynamically -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Update your dashboard cards to include these IDs -->
+<div class="dashboard-cards">
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Total Complaints</span>
+            <i class="fas fa-clipboard-list"></i>
+        </div>
+        <div class="card-value" id="totalComplaints">0</div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Pending</span>
+            <i class="fas fa-clock"></i>
+        </div>
+        <div class="card-value" id="pendingComplaints">0</div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">In Progress</span>
+            <i class="fas fa-spinner"></i>
+        </div>
+        <div class="card-value" id="inProgressComplaints">0</div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Resolved</span>
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="card-value" id="resolvedComplaints">0</div>
+    </div>
+</div>
+
+<!-- Add this before closing body tag -->
+<script src="../scripts/dashboard.js"></script>

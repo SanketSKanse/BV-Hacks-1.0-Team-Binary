@@ -4,9 +4,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function displayComplaints() {
     const complaintsTableBody = document.getElementById('complaintsTableBody');
-    const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+    let complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+    
+    // Sort complaints by ID in descending order (latest first)
+    complaints.sort((a, b) => b.id - a.id);
     
     complaintsTableBody.innerHTML = '';
+
+    if (complaints.length === 0) {
+        complaintsTableBody.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align: center;">No complaints found</td>
+            </tr>`;
+        return;
+    }
 
     complaints.forEach(complaint => {
         const row = document.createElement('tr');
