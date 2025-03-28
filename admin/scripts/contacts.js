@@ -9,7 +9,7 @@ document.querySelectorAll('.category-list button').forEach(button => {
         // Add active class to clicked button
         this.classList.add('active');
 
-        // Update category title and workers based on selection
+        // Update category title and workers based on selection.
         const category = this.getAttribute('data-category');
         updateWorkerDetails(category);
     });
