@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Complaint History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="theme.css">
+   <link rel="stylesheet" href="../styles/history.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-logo">CMS</div>
+            <ul class="sidebar-menu">
+                <li><a href="admin2.html">Dashboard</a></li>
+                <li><a href="complaints.html">Complaints</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="contacts.html">Contacts</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="#logout" class="btn btn-secondary">Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="dashboard-header">
+                <h1>Complaint History</h1>
+                <div>Welcome, John Doe</div>
+            </div>
+
+            <!-- Complaints History Section -->
+            <div class="card">
+                <!-- Date Range and Export Filters -->
+                <div class="complaints-filter">
+                    <div class="date-range">
+                        <input type="date" id="startDate">
+                        <span>to</span>
+                        <input type="date" id="endDate">
+                    </div>
+                    <div class="export-buttons">
+                        <button id="filterBtn" class="btn">Apply Filter</button>
+                        <button id="exportPDFBtn" class="btn">Export PDF</button>
+                        <button id="exportExcelBtn" class="btn">Export Excel</button>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="complaints-filter">
+                    <div class="filter-group">
+                        <select id="departmentFilter" class="btn">
+                            <option value="">All Departments</option>
+                            <option value="hostel">Hostel</option>
+                            <option value="it">IT</option>
+                            <option value="electrical">Electrical</option>
+                            <option value="cafeteria">Cafeteria</option>
+                        </select>
+                        <select id="statusFilter" class="btn">
+                            <option value="">All Statuses</option>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Complaints History Table -->
+                <table class="complaints-table">
+                    <thead>
+                        <tr>
+                            <th>Complaint ID</th>
+                            <th>Student Name</th>
+                            <th>Department</th>
+                            <th>Description</th>
+                            <th>Date Reported</th>
+                            <th>Resolution Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="complaintsHistoryBody">
+                        <!-- Complaints history will be dynamically populated here -->
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+                <div id="pagination" style="display: flex; justify-content: center; margin-top: 20px;">
+                    <button id="prevPage" class="btn" style="margin-right: 10px;">Previous</button>
+                    <span id="pageInfo">Page 1 of 5</span>
+                    <button id="nextPage" class="btn" style="margin-left: 10px;">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/history.js"></script>
+        
+      
+</body>
+</html>
