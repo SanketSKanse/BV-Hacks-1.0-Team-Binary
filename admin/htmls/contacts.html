@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Contacts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin2.css">
+    <link rel="stylesheet" href="theme.css"> 
+    <link rel="stylesheet" href="../styles/contacts.css"> 
+   
+    
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar (same as admin2.html) -->
+        <div class="sidebar">
+            <div class="sidebar-logo">CMS</div>
+            <ul class="sidebar-menu">
+                <li><a href="admin2.html">Dashboard</a></li>
+                <li><a href="complaints.html">Complaints</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="contacts.html" class="active">Contacts</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="#logout" class="btn btn-secondary">Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="dashboard-header">
+                <h1>Department Contacts</h1>
+                <div>Welcome, John Doe</div>
+            </div>
+
+            <div class="card contacts-container">
+                <!-- Category Selection -->
+                <div class="category-list">
+                    <h2 style="margin-bottom: 20px;">Department Categories</h2>
+                    <ul>
+                        <li><button class="active" data-category="it">IT Department</button></li>
+                        <li><button data-category="academics">Academics</button></li>
+                        <li><button data-category="infrastructure">Infrastructure</button></li>
+                        <li><button data-category="maintenance">Maintenance</button></li>
+                        <li><button data-category="security">Security</button></li>
+                        <li><button data-category="hostel">Hostel Management</button></li>
+                    </ul>
+                </div>
+
+                <!-- Worker Details -->
+                <div class="worker-details">
+                    <h2 id="category-title">IT Department Contacts</h2>
+                    <div id="workers-container">
+                        <div class="worker-card">
+                            <div class="worker-avatar">RK</div>
+                            <div class="worker-info">
+                                <h3>Rahul Kumar</h3>
+                                <p>Network Administrator</p>
+                                <p>Email: rahul.kumar@college.edu</p>
+                                <p>Phone: +91 9876543210</p>
+                            </div>
+                        </div>
+                        <div class="worker-card">
+                            <div class="worker-avatar">SP</div>
+                            <div class="worker-info">
+                                <h3>Sneha Patel</h3>
+                                <p>IT Support Specialist</p>
+                                <p>Email: sneha.patel@college.edu</p>
+                                <p>Phone: +91 9988776655</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="../scripts/contacts.js"></script>
+    <script src="theme.js"></script>
+</body>
+</html>
