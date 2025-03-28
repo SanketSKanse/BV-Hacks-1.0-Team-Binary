@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Complaints - Smart Complaint Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>CMS</h2>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link" id="dashboardLink">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="newcomplaint.html" class="nav-link" id="newComplaintLink">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>New Complaint</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="mycomplaints.html" class="nav-link active" id="complaintsLink">
+                    <i class="fas fa-list"></i>
+                    <span>My Complaints</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" id="profileLink">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" id="logoutLink">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="header">
+            <h1>My Complaints</h1>
+            <div class="user-profile">
+                <div class="user-avatar">JS</div>
+                <span>John Smith</span>
+            </div>
+        </div>
+
+        <div class="complaints-list">
+            <table class="complaints-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Category</th>
+                        <th>Priority</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="complaintsTableBody">
+                    <!-- Complaint rows will be added here -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="mycomplaints.js"></script>
+</body>
+</html>
