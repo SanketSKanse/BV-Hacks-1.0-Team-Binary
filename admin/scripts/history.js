@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderPaginatedComplaints(filteredComplaints);
     }
 
-    // Render paginated complaints
+    // Render paginated complaints...
     function renderPaginatedComplaints(complaints) {
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update page info
         const totalPages = Math.ceil(complaints.length / itemsPerPage);
-        pageInfo.textContent = Page ${currentPage} of ${totalPages};
+        pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
 
         // Enable/disable pagination buttons
         prevPageBtn.disabled = currentPage === 1;
