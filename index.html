@@ -80,6 +80,11 @@
             color: #3498db;
             text-decoration: none;
         }
+        .loginbutton {
+            text-decoration: none;
+            color: white;
+        }
+
     </style>
 </head>
 <body>
@@ -94,7 +99,7 @@
         <form id="studentLoginForm" class="login-form">
             <input type="email" id="studentEmail" placeholder="Student Email" required>
             <input type="password" id="studentPassword" placeholder="Password" required>
-            <button type="submit">Login</button>
+            <button type="submit"><a href="user/htmls/user.html" class="loginbutton">Login</a></button>
             <div class="switch-form">
                 Not a student? <a href="#" onclick="showLoginForm('admin')">Admin Login</a>
             </div>
@@ -103,7 +108,7 @@
         <form id="adminLoginForm" class="login-form">
             <input type="text" id="adminUsername" placeholder="Admin Username" required>
             <input type="password" id="adminPassword" placeholder="Password" required>
-            <button type="submit">Login</button>
+            <button type="submit"><a href="admin/htmls/admin2.html" class="loginbutton">Login</a></button>
             <div class="switch-form">
                 Not an admin? <a href="#" onclick="showLoginForm('student')">Student Login</a>
             </div>
@@ -111,11 +116,7 @@
     </div>
 
     <script>
-        // Specified email and password stored in script.js
-        const studentEmail = 'student@example.com';
-        const studentPassword = 'password';
-        const adminUsername = 'admin';
-        const adminPassword = 'adminpassword';
+       
 
         function showLoginForm(userType) {
             // Hide all login forms
@@ -133,34 +134,7 @@
         // Initially show student login form
         showLoginForm('student');
 
-        // Add form submission event listeners
-        document.getElementById('studentLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('studentEmail').value;
-            const password = document.getElementById('studentPassword').value;
-
-            // Validate login credentials
-            if (email === studentEmail && password === studentPassword) {
-                alert('Student Login Successful!');
-                // Redirect to student dashboard or desired page
-                window.location.href = '/user/htmls/user.html'; // Replace with your actual URL
-            } else {
-                alert('Student Login Failed. Invalid credentials.');
-            }
-        });
-
-        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const username = document.getElementById('adminUsername').value;
-            const password = document.getElementById('adminPassword').value;
-
-            if (username === adminUsername && password === adminPassword) {
-                alert('Admin Login Successful!');
-                window.location.href = '/admin/htmls/admin2.html';
-            } else {
-                alert('Admin Login Failed. Invalid credentials.');
-            }
-        });
+        
     </script>
 </body>
 </html>
