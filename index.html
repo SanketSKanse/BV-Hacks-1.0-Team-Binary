@@ -119,11 +119,11 @@
        
 
         function showLoginForm(userType) {
-            // Hide all login forms
+           
             document.getElementById('studentLoginForm').classList.remove('active');
             document.getElementById('adminLoginForm').classList.remove('active');
 
-            // Show selected login form
+            
             if (userType === 'student') {
                 document.getElementById('studentLoginForm').classList.add('active');
             } else {
@@ -131,21 +131,19 @@
             }
         }
 
-        // Initially show student login form
+
         showLoginForm('student');
 
         function studentLogin() {
-            // Add your student login logic here
-            // For demonstration, always redirecting
+            
             window.location.href = 'user/htmls/user.html';
-            return false; // Prevent default form submission
+            return false; 
         }
 
         function adminLogin() {
-            // Add your admin login logic here
-            // For demonstration, always redirecting
+           
             window.location.href = 'admin/htmls/admin2.html';
-            return false; // Prevent default form submission
+            return false; 
         }
     </script>
 </body>
